@@ -7,7 +7,9 @@ class UserTest < ActiveSupport::TestCase
         
         @user = User.new(first_name: 'Kaif',
                         last_name: 'Mukhtar',
-                        email: 'kaif@example.com')
+                        email: 'kaif@example.com',
+                        password: 'welcome', 
+                        password_confirmation: 'welcome')
     end
     
     def test_instance_of_user
@@ -79,6 +81,25 @@ class UserTest < ActiveSupport::TestCase
         duplicate_user.email = @user.email.downcase
         @user.save
         assert_not duplicate_user.valid?
+    end
+
+    def test_user_should_not_be_saved_without_password
+        @user.password = nil
+        assert_not @user.save
+        assert_equal ["Password can't be blank"],
+                      @user.errors.full_messages
+    end
+
+    def test_user_should_not_be_saved_without_password_confirmation
+        @user.password_confirmation = nil
+        assert_not @user.save
+        assert_equal ["Password confirmation can't be blank"],
+                      @user.errors.full_messages
+    end
+
+    def test_password_should_have_a_minimum_length 
+        @user.password = @user.password_confirmation = 'a' * 5
+        assert @user.invalid?
     end
 
 end
