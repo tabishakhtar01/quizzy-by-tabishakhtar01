@@ -9,6 +9,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
     validates :password, length: { minimum: 6 }
     validates :password_confirmation, presence: true, on: :create
+    enum role: {standard: 0, administrator: 1 }
 
     before_save :to_lowercase
 
