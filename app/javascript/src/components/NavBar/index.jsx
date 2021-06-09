@@ -27,7 +27,7 @@ const NavBar = () => {
         <div className="flex justify-between h-16 items-center">
           <h1 className="font-sans text-3xl font-semibold">
             <Link className="cursor-pointer" to="/">
-              Polly
+              Quizzy
             </Link>
           </h1>
           <div className="flex items-center justify-end gap-x-4">
