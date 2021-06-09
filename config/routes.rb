@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # get 'home/index'
   resources :users, only: %i[create]
-  resources :sessions, only: %i[create destroy] 
+  resource :sessions, only: %i[create destroy] 
 
   root "home#index"
   get '*path', to: 'home#index', via: :all

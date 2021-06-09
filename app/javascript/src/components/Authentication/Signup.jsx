@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-
 import SignupForm from "components/Authentication/Form/SignupForm";
 import authApi from "apis/auth";
+import { setToLocalStorage } from "helpers/storage";
 
 const Signup = ({ history }) => {
   const [firstName, setFirstName] = useState("");
@@ -15,7 +15,7 @@ const Signup = ({ history }) => {
     event.preventDefault();
     try {
       setLoading(true);
-      await authApi.signup({
+      const response = await authApi.signup({
         user: {
           first_name: firstName,
           last_name: lastname,
@@ -24,11 +24,17 @@ const Signup = ({ history }) => {
           password_confirmation: passwordConfirmation,
         },
       });
+      setToLocalStorage({
+        email,
+        userId: response.data.user_id,
+        userFirstName: response.data.user_first_name,
+      });
       setLoading(false);
       history.push("/");
     } catch (error) {
       setLoading(false);
-      logger.error(error);
+      //   logger.error(error);
+      alert(error);
     }
   };
   return (
