@@ -92,7 +92,10 @@ const Dashboard = ({ history }) => {
           <Link to="/quizzes/create">Add a new quiz</Link>
         </button>
       </div>
-      <h1 className="text-xl leading-5 text-center">
+      <h1
+        className="text-xl flex justify-center items-center"
+        style={{ height: "60vh" }}
+      >
         You have not created any quiz
       </h1>
     </Container>
