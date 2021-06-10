@@ -10,6 +10,8 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { either, isEmpty, isNil } from "ramda";
 import { getFromLocalStorage } from "helpers/storage";
 import CreateQuiz from "./components/Quizzes/CreateQuiz";
+import EditQuiz from "./components/Quizzes/EditQuiz";
+import ShowQuiz from "./components/Quizzes/ShowQuiz";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +35,8 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
+        <Route exact path="/quizzes/:id/show" component={ShowQuiz} />
+        <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
         <Route exact path="/quizzes/create" component={CreateQuiz} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />

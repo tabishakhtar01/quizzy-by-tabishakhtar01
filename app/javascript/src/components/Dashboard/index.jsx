@@ -22,6 +22,28 @@ const Dashboard = ({ history }) => {
     }
   };
 
+  const showQuiz = id => {
+    history.push(`/quizzes/${id}/show`);
+  };
+
+  const updateQuiz = id => {
+    history.push(`/quizzes/${id}/edit`);
+  };
+
+  const destroyQuiz = async id => {
+    try {
+      const confirmation = prompt("Type K to confirm deletion");
+      {
+        (confirmation === "k" || confirmation === "K") &&
+          (await quizzesApi.destroy(id));
+        await fetchQuizzes();
+      }
+      await fetchQuizzes();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   useEffect(() => {
     fetchQuizzes();
   }, []);
@@ -48,7 +70,12 @@ const Dashboard = ({ history }) => {
           </button>
         </div>
         <h1 className="text-6xl">List of quizzes</h1>
-        <ListQuizzes data={quizzes} />
+        <ListQuizzes
+          data={quizzes}
+          updateQuiz={updateQuiz}
+          showQuiz={showQuiz}
+          destroyQuiz={destroyQuiz}
+        />
       </Container>
     );
   }
