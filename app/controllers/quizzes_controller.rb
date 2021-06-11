@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
     before_action :load_quiz, only: %i[show update destroy]
+
     def index
         quizzes = Quiz.all
         render status: :ok, json: {quizzes: quizzes}

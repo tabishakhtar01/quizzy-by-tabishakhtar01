@@ -12,6 +12,7 @@ import { getFromLocalStorage } from "helpers/storage";
 import CreateQuiz from "./components/Quizzes/CreateQuiz";
 import EditQuiz from "./components/Quizzes/EditQuiz";
 import ShowQuiz from "./components/Quizzes/ShowQuiz";
+import CreateQuestion from "./components/Questions/CreateQuestion";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,7 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
+        <Route exact path="/quizzes/:id/show/add" component={CreateQuestion} />
         <Route exact path="/quizzes/:id/show" component={ShowQuiz} />
         <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
         <Route exact path="/quizzes/create" component={CreateQuiz} />

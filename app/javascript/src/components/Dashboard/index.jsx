@@ -32,9 +32,9 @@ const Dashboard = ({ history }) => {
 
   const destroyQuiz = async id => {
     try {
-      const confirmation = prompt("Type K to confirm deletion");
+      const confirmation = prompt("Type Y to confirm deletion");
       {
-        (confirmation === "k" || confirmation === "K") &&
+        (confirmation === "y" || confirmation === "Y") &&
           (await quizzesApi.destroy(id));
         await fetchQuizzes();
       }
