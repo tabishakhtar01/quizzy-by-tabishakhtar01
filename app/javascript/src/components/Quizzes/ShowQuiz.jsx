@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Container from "components/Container";
 import PageLoader from "components/PageLoader";
-import quizzesApi from "apis/quizzes";
-import questionsApi from "../../apis/question";
-// import CreateQuestion from "../Questions/CreateQuestion";
+import quizzesApi from "../../apis/quizzes";
+import questionsApi from "../../apis/questions";
 import { isNil, isEmpty, either } from "ramda";
-import CreateQuestion from "../Questions/CreateQuestion";
 
 const ShowQuiz = ({ history }) => {
   const { id } = useParams();
@@ -30,10 +27,10 @@ const ShowQuiz = ({ history }) => {
   const fetchQuestions = async () => {
     try {
       const response = await questionsApi.show(id);
-      setQuestions(response.data.questions);
+      setQuestions(response.data.question);
       setLoading(false);
     } catch (error) {
-      // logger.error(error);
+      alert(error);
       setLoading(false);
     }
   };
@@ -62,7 +59,8 @@ const ShowQuiz = ({ history }) => {
          group hover:bg-opacity-90 focus:outline-none"
             onClick={CreateQuest}
           >
-            {/* <Link to="/quizzes/:id/show/add">Add questions</Link> */}
+            {" "}
+            Add Question
           </button>
         </div>
         <h1 className="mt-10 text-6xl text-gray-600">{quizDetails?.title}</h1>
@@ -85,7 +83,7 @@ const ShowQuiz = ({ history }) => {
          group hover:bg-opacity-90 focus:outline-none"
           onClick={CreateQuest}
         >
-          {/* <Link to="/quizzes/:id/show/add">Add questions</Link> */}
+          Add Question
         </button>
       </div>
       <h1 className="mt-10 text-6xl text-gray-600">{quizDetails?.title}</h1>

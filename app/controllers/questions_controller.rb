@@ -30,6 +30,6 @@ class QuestionsController < ApplicationController
 
         def load_question
             @question = Question.where(quiz_id: params[:id])
-            render json: { notice: 'Something went wrong'}
+            # render json: { notice: 'Something went wrong'}
         end
 end

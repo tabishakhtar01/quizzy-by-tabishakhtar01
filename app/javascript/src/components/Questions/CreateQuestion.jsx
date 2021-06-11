@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Container from "components/Container";
 import QuestionForm from "components/Questions/Form/QuestionForm";
-import questionsApi from "../../apis/question";
+import questionsApi from "../../apis/questions";
 import { useParams } from "react-router-dom";
 import quizzesApi from "../../apis/quizzes";
 
@@ -16,27 +16,12 @@ const CreateQuestion = ({ history }) => {
     try {
       await questionsApi.create({ question: { question, quiz_id: id } });
       setLoading(false);
-      history.push("/dashboard");
+      history.push(`/quizzes/${id}/show`);
     } catch (error) {
       //   logger.error(error);
       setLoading(false);
     }
   };
-
-  //   const fetchQuizDetails = async () => {
-  //     try {
-  //       const response = await quizzesApi.list();
-  //       setQuizId(response.data.quizzes[0].id);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       // logger.error(error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchQuizDetails();
-  //   }, []);
 
   return (
     <Container>
