@@ -6,6 +6,7 @@ import quizzesApi from "../../apis/quizzes";
 import questionsApi from "../../apis/questions";
 import optionsApi from "../../apis/options";
 import { isNil, isEmpty, either } from "ramda";
+import Check from "@material-ui/icons/CheckCircleTwoTone";
 
 const ShowQuiz = ({ history }) => {
   const { id } = useParams();
@@ -81,8 +82,20 @@ const ShowQuiz = ({ history }) => {
                     {optionDetails.map(opt => {
                       if (opt.question_id === curr.id)
                         return (
-                          <p className="text-xl my-4 text-gray-700">
-                            {opt.answer}
+                          <p
+                            className={`text-xl my-4 ${
+                              curr.correct_answer == opt.correct_answer_id
+                                ? "text-green-600"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            {opt.answer}{" "}
+                            {curr.correct_answer == opt.correct_answer_id && (
+                              <>
+                                <Check />
+                                Correct answer
+                              </>
+                            )}
                           </p>
                         );
                     })}

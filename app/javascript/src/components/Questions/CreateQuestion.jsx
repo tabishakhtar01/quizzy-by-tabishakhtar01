@@ -12,6 +12,7 @@ const CreateQuestion = ({ history }) => {
   const [answer_two, setAnswer_two] = useState("");
   const [answer_three, setAnswer_three] = useState("");
   const [answer_four, setAnswer_four] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const [loading, setLoading] = useState(false);
   const handleSubmit = async event => {
@@ -22,11 +23,12 @@ const CreateQuestion = ({ history }) => {
           question,
           quiz_id: id,
           options_attributes: [
-            { answer: answer_one },
-            { answer: answer_two },
-            { answer: answer_three },
-            { answer: answer_four },
+            { answer: answer_one, correct_answer_id: "0" },
+            { answer: answer_two, correct_answer_id: "1" },
+            { answer: answer_three, correct_answer_id: "2" },
+            { answer: answer_four, correct_answer_id: "3" },
           ],
+          correct_answer: answer,
         },
       });
       setLoading(false);
@@ -45,6 +47,7 @@ const CreateQuestion = ({ history }) => {
         setAnswer_two={setAnswer_two}
         setAnswer_three={setAnswer_three}
         setAnswer_four={setAnswer_four}
+        setAnswer={setAnswer}
         loading={loading}
         handleSubmit={handleSubmit}
       />
