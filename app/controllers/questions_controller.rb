@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
     before_action :load_question, only: [:show]
+    # before_action :load_options, only: [:show]
     def index
         questions = Question.all
         render status: :ok, json: { questions: questions}
@@ -24,7 +25,7 @@ class QuestionsController < ApplicationController
       private
     
       def question_params
-        params.require(:question).permit(:question, :quiz_id)
+        params.require(:question).permit(:question, :quiz_id, options_attributes: [:answer])
       end
 
 
@@ -32,4 +33,11 @@ class QuestionsController < ApplicationController
             @question = Question.where(quiz_id: params[:id])
             # render json: { notice: 'Something went wrong'}
         end
+
+        # def load_options
+        #   @options = Option.where(Question_id: params[:id]).limit(4)
+    
+        # rescue ActiveRecord::RecordNotFound => errors
+        #   render json: {errors: errors }
+        # end
 end

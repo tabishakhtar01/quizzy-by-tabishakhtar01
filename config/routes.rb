@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :sessions, only: %i[create destroy] 
   resources :quizzes, except: %i[new edit]
   resources :questions
+  resources :options
   root "home#index"
   get '*path', to: 'home#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
