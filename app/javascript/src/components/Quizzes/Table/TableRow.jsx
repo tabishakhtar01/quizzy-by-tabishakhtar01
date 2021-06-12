@@ -18,7 +18,9 @@ const TableRow = ({ data, showQuiz, destroyQuiz, updateQuiz }) => {
             leading-5 text-right cursor-pointer"
           >
             <a
-              className="text-indigo-600 hover:text-indigo-900"
+              className="text-sm font-medium
+              leading-5 whitespace-no-wrap
+              bg-blue-200 hover:bg-blue-700 hover:text-white text-blue-700 font-bold w-full text-center px-5 py-1 rounded-full"
               onClick={() => updateQuiz(rowData.id)}
             >
               Edit
@@ -29,8 +31,9 @@ const TableRow = ({ data, showQuiz, destroyQuiz, updateQuiz }) => {
             leading-5 text-right cursor-pointer"
           >
             <a
-              className="text-red-500
-              hover:text-red-700"
+              className="text-sm font-medium
+            leading-5 whitespace-no-wrap
+            bg-red-200 hover:bg-red-700 hover:text-white text-red-700 font-bold w-full text-center px-2 py-1 rounded-full"
               onClick={() => destroyQuiz(rowData.id)}
             >
               Delete
