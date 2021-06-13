@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-    before_action :load_question, only: [:show]
+    before_action :load_question, only: %i[show]
     # before_action :load_options, only: [:show]
     def index
         questions = Question.all
@@ -20,6 +20,16 @@ class QuestionsController < ApplicationController
 
       def show
         render status: :ok, json: { question: @question}
+      end
+
+      def destroy
+        if @question = Question.find(params[:id])
+          @question.destroy
+          render status: :ok, json: { notice: 'Successfully deleted question.' }
+        else
+          render status: :unprocessable_entity, json: { errors:
+          @question.errors.full_messages }
+        end
       end
     
       private
