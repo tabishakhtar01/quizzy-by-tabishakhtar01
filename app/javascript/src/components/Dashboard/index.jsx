@@ -66,7 +66,7 @@ const Dashboard = ({ history }) => {
             onClick={addQuiz}
             className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
           >
             Add a new quiz
@@ -90,7 +90,7 @@ const Dashboard = ({ history }) => {
           onClick={addQuiz}
           className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
         >
           Add a new quiz

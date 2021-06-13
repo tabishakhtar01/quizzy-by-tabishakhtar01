@@ -25,8 +25,14 @@ const CreateQuestion = ({ history }) => {
           options_attributes: [
             { answer: answer_one, correct_answer_id: "0" },
             { answer: answer_two, correct_answer_id: "1" },
-            { answer: answer_three, correct_answer_id: "2" },
-            { answer: answer_four, correct_answer_id: "3" },
+            answer_three.length > 0 && {
+              answer: answer_three,
+              correct_answer_id: "2",
+            },
+            answer_four.length > 0 && {
+              answer: answer_four,
+              correct_answer_id: "3",
+            },
           ],
           correct_answer: answer,
         },

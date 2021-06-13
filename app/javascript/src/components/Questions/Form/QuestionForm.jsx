@@ -58,7 +58,7 @@ const QuestionForm = ({
             onChange={e => setAnswer_three(e.target.value)}
           />
           <button
-            className="bg-red-600 text-white mt-5 mr-5 px-3 rounded"
+            className="bg-red-700 text-white mt-5 mr-5 px-3 rounded-full hover:bg-red-300 hover:text-red-700"
             onClick={clearAll}
           >
             Remove
@@ -74,7 +74,7 @@ const QuestionForm = ({
               onChange={e => setAnswer_three(e.target.value)}
             />
             <button
-              className="bg-red-600 text-white mt-5 mr-5 px-3 rounded"
+              className="bg-red-700 text-white mt-5 mr-5 px-3 rounded-full hover:bg-red-300 hover:text-red-700"
               onClick={deleteField}
             >
               Remove
@@ -87,7 +87,7 @@ const QuestionForm = ({
               onChange={e => setAnswer_four(e.target.value)}
             />
             <button
-              className="bg-red-600 text-white mt-5 mr-5 px-3 rounded"
+              className="bg-red-700 text-white mt-5 mr-5 px-3 rounded-full hover:bg-red-300 hover:text-red-700"
               onClick={deleteField}
             >
               Remove
@@ -97,7 +97,7 @@ const QuestionForm = ({
       )}
       {inputcount < 2 && (
         <button
-          className="mt-5 bg-blue-600 text-white px-3 rounded"
+          className="mt-5 bg-blue-700 text-white mt-5 mr-5 px-3 rounded-full hover:bg-blue-300 hover:text-blue-700"
           onClick={AddInput}
         >
           Add Option
@@ -121,15 +121,32 @@ const QuestionForm = ({
               />
             </svg>
             <select
-              className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 
+              className="border border-gray-500 rounded-full text-gray-800 h-10 pl-5 pr-10 
                     bg-white hover:border-gray-400 focus:outline-none appearance-none"
               onChange={e => setAnswer(e.target.value)}
             >
               <option>Select Option</option>
-              <option value="0">option 1</option>
-              <option value="1">option 2</option>
-              <option value="2">option 3</option>
-              <option value="3">option 4</option>
+              {inputcount === 0 ? (
+                <>
+                  <option value="0">option 1</option>
+                  <option value="1">option 2</option>
+                </>
+              ) : inputcount === 1 ? (
+                <>
+                  <option value="0">option 1</option>
+                  <option value="1">option 2</option>
+                  <option value="2">option 3</option>{" "}
+                </>
+              ) : inputcount === 2 ? (
+                <>
+                  <option value="0">option 1</option>
+                  <option value="1">option 2</option>
+                  <option value="2">option 3</option>
+                  <option value="3">option 4</option>
+                </>
+              ) : (
+                ""
+              )}
             </select>
           </div>
         </div>

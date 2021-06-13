@@ -61,7 +61,7 @@ const ShowQuiz = ({ history }) => {
           <button
             className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
             onClick={CreateQuest}
           >
@@ -82,21 +82,28 @@ const ShowQuiz = ({ history }) => {
                     {optionDetails.map(opt => {
                       if (opt.question_id === curr.id)
                         return (
-                          <p
-                            className={`text-xl my-4 ${
-                              curr.correct_answer == opt.correct_answer_id
-                                ? "text-green-600"
-                                : "text-gray-700"
-                            }`}
-                          >
-                            {opt.answer}{" "}
-                            {curr.correct_answer == opt.correct_answer_id && (
-                              <>
-                                <Check />
-                                Correct answer
-                              </>
-                            )}
-                          </p>
+                          <div>
+                            <span className="m-5">
+                              Option {parseInt(opt.correct_answer_id) + 1}:
+                            </span>
+                            <span
+                              className={`text-xl my-4 ${
+                                curr.correct_answer == opt.correct_answer_id
+                                  ? "text-green-600"
+                                  : "text-gray-700"
+                              }`}
+                            >
+                              <span className="text-gray-700">
+                                {opt.answer}{" "}
+                              </span>
+                              {curr.correct_answer == opt.correct_answer_id && (
+                                <>
+                                  <Check />
+                                  Correct answer
+                                </>
+                              )}
+                            </span>
+                          </div>
                         );
                     })}
                   </div>
@@ -115,7 +122,7 @@ const ShowQuiz = ({ history }) => {
         <button
           className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
           onClick={CreateQuest}
         >
