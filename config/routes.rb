@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[create]
   resource :sessions, only: %i[create destroy] 
   resources :quizzes, except: %i[new edit]
+  resources :questions
+  resources :options
   root "home#index"
   get '*path', to: 'home#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

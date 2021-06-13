@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
     before_action :load_quiz, only: %i[show update destroy]
+
     def index
         quizzes = Quiz.all
         render status: :ok, json: {quizzes: quizzes}
@@ -18,7 +19,7 @@ class QuizzesController < ApplicationController
       end
 
       def show
-        render status: :ok, json: { quiz: @quiz }
+        render status: :ok, json: { quiz: @quiz}
       end
 
       def update

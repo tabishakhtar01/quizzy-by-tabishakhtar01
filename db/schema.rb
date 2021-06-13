@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_103036) do
+ActiveRecord::Schema.define(version: 2021_06_12_204525) do
+
+  create_table "options", force: :cascade do |t|
+    t.string "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "question_id"
+    t.string "correct_answer_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text "question"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quiz_id"
+    t.string "correct_answer"
+  end
 
   create_table "quizzes", force: :cascade do |t|
     t.text "title", null: false
@@ -29,4 +45,6 @@ ActiveRecord::Schema.define(version: 2021_06_10_103036) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "options", "questions", on_delete: :cascade
+  add_foreign_key "questions", "quizzes", on_delete: :cascade
 end

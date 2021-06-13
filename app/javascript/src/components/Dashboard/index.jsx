@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
-import Button from "components/Button";
 import Container from "components/Container";
 import ListQuizzes from "components/Quizzes/ListQuizzes";
 import PageLoader from "components/PageLoader";
 import quizzesApi from "apis/quizzes";
-import { Link } from "react-router-dom";
 
 const Dashboard = ({ history }) => {
   const [quizzes, setQuizzes] = useState([]);
@@ -22,6 +20,10 @@ const Dashboard = ({ history }) => {
     }
   };
 
+  const addQuiz = () => {
+    history.push(`/quizzes/create`);
+  };
+
   const showQuiz = id => {
     history.push(`/quizzes/${id}/show`);
   };
@@ -32,9 +34,9 @@ const Dashboard = ({ history }) => {
 
   const destroyQuiz = async id => {
     try {
-      const confirmation = prompt("Type K to confirm deletion");
+      const confirmation = prompt("Type Y to confirm deletion");
       {
-        (confirmation === "k" || confirmation === "K") &&
+        (confirmation === "y" || confirmation === "Y") &&
           (await quizzesApi.destroy(id));
         await fetchQuizzes();
       }
@@ -61,15 +63,16 @@ const Dashboard = ({ history }) => {
       <Container>
         <div className="flex justify-end">
           <button
+            onClick={addQuiz}
             className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
           >
-            <Link to="/quizzes/create">Add a new quiz</Link>
+            Add a new quiz
           </button>
         </div>
-        <h1 className="text-6xl">List of quizzes</h1>
+        <h1 className="text-6xl text-gray-600">List of quizzes</h1>
         <ListQuizzes
           data={quizzes}
           updateQuiz={updateQuiz}
@@ -84,12 +87,13 @@ const Dashboard = ({ history }) => {
     <Container>
       <div className="flex justify-end">
         <button
+          onClick={addQuiz}
           className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
-         ease-in-out bg-bb-purple border border-transparent rounded-md
+         ease-in-out bg-bb-purple border border-transparent rounded-full
          group hover:bg-opacity-90 focus:outline-none"
         >
-          <Link to="/quizzes/create">Add a new quiz</Link>
+          Add a new quiz
         </button>
       </div>
       <h1

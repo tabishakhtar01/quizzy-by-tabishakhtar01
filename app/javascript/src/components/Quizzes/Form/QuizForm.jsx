@@ -13,7 +13,7 @@ const QuizForm = ({
   return (
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
       <Input
-        label="Title"
+        label="Quiz Title"
         placeholder=""
         value={title}
         onChange={e => setTitle(e.target.value)}
