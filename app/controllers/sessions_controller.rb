@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
             user_first_name: user.first_name,
           }
         else
-            render status: :unauthorized, json: { notice: 'session.incorrect_credentials' }
+            render status: :unauthorized, json: { notice: 'Incorrect credentials' }
         end
     end
 

@@ -8,6 +8,7 @@ import optionsApi from "../../apis/options";
 import { isNil, isEmpty, either } from "ramda";
 import Check from "@material-ui/icons/CheckCircleTwoTone";
 import EditIcon from "@material-ui/icons/Edit";
+
 import DeleteIcon from "@material-ui/icons/DeleteOutline";
 
 const ShowQuiz = ({ history }) => {
@@ -57,6 +58,10 @@ const ShowQuiz = ({ history }) => {
     }
   };
 
+  const updateQuestion = id => {
+    history.push(`/questions/${id}/edit`);
+  };
+
   useEffect(() => {
     fetchQuizDetails();
     fetchQuestions();
@@ -89,6 +94,13 @@ const ShowQuiz = ({ history }) => {
                 <div className="bg-gray-200 mx-10 mt-10 mb-20 rounded-xl shadow-2xl">
                   <div className="p-10">
                     <div className="flex justify-end">
+                      <button
+                        onClick={() => updateQuestion(curr.id)}
+                        className="bg-blue-700 text-white mr-5 px-3 rounded-full hover:bg-blue-300 hover:text-blue-700"
+                      >
+                        <EditIcon />
+                        Edit
+                      </button>
                       <button
                         onClick={() => destroyQuestion(curr.id)}
                         className="bg-red-700 text-white mr-5 px-3 rounded-full hover:bg-red-300 hover:text-red-700"

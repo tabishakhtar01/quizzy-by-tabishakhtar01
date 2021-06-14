@@ -13,6 +13,7 @@ import CreateQuiz from "./components/Quizzes/CreateQuiz";
 import EditQuiz from "./components/Quizzes/EditQuiz";
 import ShowQuiz from "./components/Quizzes/ShowQuiz";
 import CreateQuestion from "./components/Questions/CreateQuestion";
+import EditQuestion from "./components/Questions/EditQuestion";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
+        <Route exact path="/questions/:id/edit" component={EditQuestion} />
         <Route exact path="/quizzes/:id/show/add" component={CreateQuestion} />
         <Route exact path="/quizzes/:id/show" component={ShowQuiz} />
         <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
