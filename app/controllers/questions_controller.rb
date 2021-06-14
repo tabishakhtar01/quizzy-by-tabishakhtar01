@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-    before_action :load_question, only: [:show]
-    # before_action :load_options, only: [:show]
+    before_action :load_question, only: %i[show update]
+    # before_action :load_options, only: %i[show update]
     def index
         questions = Question.all
         render status: :ok, json: { questions: questions}
@@ -19,7 +19,28 @@ class QuestionsController < ApplicationController
       end
 
       def show
-        render status: :ok, json: { question: @question}
+        render status: :ok, json: { question: @question }
+      end
+
+      def update
+        @question = Question.find(params[:id])
+        if @question.update(question_params)
+          render status: :ok, json: {notice: 'Sucessfully Updated question'}
+        else
+          render status: :unprocessable_entity, json: { errors:
+          @question.errors.full_messages }
+        end
+      end
+
+
+      def destroy
+        if @question = Question.find(params[:id])
+          @question.destroy
+          render status: :ok, json: { notice: 'Successfully deleted question.' }
+        else
+          render status: :unprocessable_entity, json: { errors:
+          @question.errors.full_messages }
+        end
       end
     
       private
@@ -31,11 +52,10 @@ class QuestionsController < ApplicationController
 
         def load_question
             @question = Question.where(quiz_id: params[:id])
-            # render json: { notice: 'Something went wrong'}
         end
 
         # def load_options
-        #   @options = Option.where(Question_id: params[:id]).limit(4)
+        #   @options = Option.where(Question_id: params[:id])
     
         # rescue ActiveRecord::RecordNotFound => errors
         #   render json: {errors: errors }

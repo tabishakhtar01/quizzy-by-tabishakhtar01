@@ -1,5 +1,5 @@
 class OptionsController < ApplicationController
-    before_action :load_options, only: %i[index show update destroy]
+    before_action :load_options, only: %i[show]
         def index
             options = Option.all
             render status: :ok, json: { options: options}
