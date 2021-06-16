@@ -19,11 +19,14 @@ const ShowQuiz = ({ history }) => {
   const [comb, setComb] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pageLoading, setPageLoading] = useState(true);
+  const [url, getUrl] = useState("");
+  const [slugData, setSlugData] = useState("");
 
   const fetchQuizDetails = async () => {
     try {
       const response = await quizzesApi.show(id);
       setQuizDetails(response.data.quiz);
+      setSlugData(response.data.quiz.slug);
     } catch (error) {
       alert(error);
     } finally {
@@ -58,8 +61,12 @@ const ShowQuiz = ({ history }) => {
     }
   };
 
-  const updateQuestion = id => {
-    history.push(`/questions/${id}/edit`);
+  const updateQuestion = ind => {
+    history.push(`/questions/${ind}/edit`);
+  };
+
+  const CreateUrl = () => {
+    getUrl(window.location.href);
   };
 
   useEffect(() => {
@@ -74,7 +81,25 @@ const ShowQuiz = ({ history }) => {
   if (!either(isNil, isEmpty)(questions)) {
     return (
       <Container>
+        {url && (
+          <h1>
+            Published, your public link is -{" "}
+            <span className="underline text-blue-600">
+              http://localhost:3000/public/{id}/{slugData}
+            </span>
+          </h1>
+        )}
         <div className="flex justify-end">
+          <button
+            className="relative  px-4 py-2 mx-5
+        text-sm font-medium leading-5 text-white transition duration-150
+         ease-in-out bg-bb-purple border border-transparent rounded-full
+         group hover:bg-opacity-90 focus:outline-none"
+            onClick={CreateUrl}
+          >
+            {" "}
+            {url ? <span>Published</span> : <span>Publish</span>}
+          </button>
           <button
             className="relative  px-4 py-2
         text-sm font-medium leading-5 text-white transition duration-150
