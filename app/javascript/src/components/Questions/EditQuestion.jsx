@@ -8,11 +8,9 @@ import EditForm from "./Form/EditForm";
 
 const EditQuestion = ({ history }) => {
   const [question, setQuestion] = useState("");
-  const [answer_one, setAnswer_one] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { id } = useParams();
-  //   console.log('tapped question id',id,question)
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -29,16 +27,9 @@ const EditQuestion = ({ history }) => {
       alert(error);
     }
   };
-  const fetchQuestionDetails = async () => {
-    try {
-      const response = await questionsApi.list();
-      //   console.log(response.data.questions[id-1].question)
-      setQuestion(response.data.questions[id - 1].question);
-    } catch (error) {
-      alert(error);
-    } finally {
-      setPageLoading(false);
-    }
+  const fetchQuestionDetails = () => {
+    setQuestion("");
+    setPageLoading(false);
   };
 
   useEffect(() => {

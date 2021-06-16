@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Input from "components/Input";
 import Button from "components/Button";
@@ -14,7 +14,7 @@ const EditForm = ({
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
       <Input
         label="Enter Your Question"
-        placeholder=""
+        placeholder="Updation Here"
         value={question}
         onChange={e => setQuestion(e.target.value)}
       />
