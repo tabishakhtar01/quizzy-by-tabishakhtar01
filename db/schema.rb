@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_162546) do
+ActiveRecord::Schema.define(version: 2021_06_21_214947) do
+
+  create_table "attempts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "submitted"
+    t.integer "quiz_id"
+    t.string "slug_data"
+  end
 
   create_table "options", force: :cascade do |t|
     t.string "answer"
@@ -48,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_162546) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "attempts", "quizzes", on_delete: :cascade
   add_foreign_key "options", "questions", on_delete: :cascade
   add_foreign_key "questions", "quizzes", on_delete: :cascade
 end

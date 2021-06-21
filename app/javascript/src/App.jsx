@@ -15,6 +15,7 @@ import ShowQuiz from "./components/Quizzes/ShowQuiz";
 import CreateQuestion from "./components/Questions/CreateQuestion";
 import EditQuestion from "./components/Questions/EditQuestion";
 import NewUser from "./components/Quizzes/Attempt/Auth/NewUser";
+import AttemptQuiz from "./components/Quizzes/Attempt/AttemptQuiz";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,11 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
+        <Route
+          exact
+          path="/public/:slug/attempt/new/quiz"
+          component={AttemptQuiz}
+        />
         <Route exact path="/public/:slug/attempt/new" component={NewUser} />
         <Route exact path="/questions/:id/edit" component={EditQuestion} />
         <Route
