@@ -21,7 +21,7 @@ const EditQuestion = ({ history }) => {
       });
 
       setLoading(false);
-      history.push("/dashboard");
+      history.push(`/dashboard`);
     } catch (error) {
       setLoading(false);
       alert(error);

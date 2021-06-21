@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_123517) do
+ActiveRecord::Schema.define(version: 2021_06_21_162546) do
 
   create_table "options", force: :cascade do |t|
     t.string "answer"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_123517) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "correct_answer"
     t.integer "quiz_id"
+    t.string "slug_data"
   end
 
   create_table "quizzes", force: :cascade do |t|

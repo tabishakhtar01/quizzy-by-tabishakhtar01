@@ -1,63 +1,57 @@
 class QuestionsController < ApplicationController
-    before_action :load_question, only: %i[show update]
-    # before_action :load_options, only: %i[show update]
-    def index
-        questions = Question.all
-        render status: :ok, json: { questions: questions}
+  before_action :load_question, only: %i[show]
+  def index
+      questions = Question.all
+      render status: :ok, json: { questions: questions}
+  end
+
+  def create
+      @question = Question.new(question_params)
+      if @question.save
+        render status: :ok, json: { notice: 'Question was successfully created' }
+      else
+        errors = @question.errors.full_messages
+        render status: :unprocessable_entity, json: { errors: errors  }
+      end
+    rescue ActiveRecord::RecordNotUnique => e
+      render status: :unprocessable_entity, json: { errors: e.message }
     end
 
-    def create
-        @question = Question.new(question_params)
-        if @question.save
-          render status: :ok, json: { notice: 'Question was successfully created' }
-        else
-          errors = @question.errors.full_messages
-          render status: :unprocessable_entity, json: { errors: errors  }
-        end
-      rescue ActiveRecord::RecordNotUnique => e
-        render status: :unprocessable_entity, json: { errors: e.message }
+    def show
+      render status: :ok, json: { question: @question }
+    end
+
+    def update
+      @question = Question.find(params[:id])
+      if @question.update(question_params)
+        render status: :ok, json: {notice: 'Sucessfully Updated question'}
+      else
+        render status: :unprocessable_entity, json: { errors:
+        @question.errors.full_messages }
       end
+    end
 
-      def show
-        render status: :ok, json: { question: @question }
+
+    def destroy
+      @question = Question.find(params[:id])
+
+
+        if @question.destroy
+        render status: :ok, json: { notice: 'Successfully deleted question.' }
+      else
+        render status: :unprocessable_entity, json: { errors:
+        @question.errors.full_messages }
       end
+    end
+  
+    private
+  
+    def question_params
+      params.require(:question).permit(:question, :quiz_id, :slug_data, :correct_answer ,options_attributes: [:answer, :correct_answer_id])
+    end
 
-      def update
-        @question = Question.find(params[:id])
-        if @question.update(question_params)
-          render status: :ok, json: {notice: 'Sucessfully Updated question'}
-        else
-          render status: :unprocessable_entity, json: { errors:
-          @question.errors.full_messages }
-        end
+
+      def load_question
+          @question = Question.where(slug_data: params[:slug])
       end
-
-
-      def destroy
-        if @question = Question.find(params[:id])
-          @question.destroy
-          render status: :ok, json: { notice: 'Successfully deleted question.' }
-        else
-          render status: :unprocessable_entity, json: { errors:
-          @question.errors.full_messages }
-        end
-      end
-    
-      private
-    
-      def question_params
-        params.require(:question).permit(:question, :quiz_id, :correct_answer ,options_attributes: [:answer, :correct_answer_id])
-      end
-
-
-        def load_question
-            @question = Question.where(quiz_id: params[:id])
-        end
-
-        # def load_options
-        #   @options = Option.where(Question_id: params[:id])
-    
-        # rescue ActiveRecord::RecordNotFound => errors
-        #   render json: {errors: errors }
-        # end
 end
