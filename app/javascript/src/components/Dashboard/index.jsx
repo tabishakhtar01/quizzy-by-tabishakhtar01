@@ -24,20 +24,20 @@ const Dashboard = ({ history }) => {
     history.push(`/quizzes/create`);
   };
 
-  const showQuiz = id => {
-    history.push(`/quizzes/${id}/show`);
+  const showQuiz = slug => {
+    history.push(`/quizzes/${slug}/show`);
   };
 
-  const updateQuiz = id => {
-    history.push(`/quizzes/${id}/edit`);
+  const updateQuiz = slug => {
+    history.push(`/quizzes/${slug}/edit`);
   };
 
-  const destroyQuiz = async id => {
+  const destroyQuiz = async slug => {
     try {
       const confirmation = prompt("Type Y to confirm deletion");
       {
         (confirmation === "y" || confirmation === "Y") &&
-          (await quizzesApi.destroy(id));
+          (await quizzesApi.destroy(slug));
         await fetchQuizzes();
       }
       await fetchQuizzes();

@@ -12,7 +12,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/DeleteOutline";
 
 const ShowQuiz = ({ history }) => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [quizDetails, setQuizDetails] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [optionDetails, setOptionDetails] = useState([]);
@@ -24,7 +24,7 @@ const ShowQuiz = ({ history }) => {
 
   const fetchQuizDetails = async () => {
     try {
-      const response = await quizzesApi.show(id);
+      const response = await quizzesApi.show(slug);
       setQuizDetails(response.data.quiz);
       setSlugData(response.data.quiz.slug);
     } catch (error) {
@@ -35,7 +35,7 @@ const ShowQuiz = ({ history }) => {
   };
   const fetchQuestions = async () => {
     try {
-      const response = await questionsApi.show(id);
+      const response = await questionsApi.show(slug);
       const optionResponse = await optionsApi.list();
       setQuestions(response.data.question);
       setOptionDetails(optionResponse.data.options);
@@ -48,7 +48,7 @@ const ShowQuiz = ({ history }) => {
   };
 
   const CreateQuest = () => {
-    history.push(`/quizzes/${id}/show/add`);
+    history.push(`/quizzes/${slug}/show/add`);
   };
 
   const destroyQuestion = async id => {
@@ -61,8 +61,8 @@ const ShowQuiz = ({ history }) => {
     }
   };
 
-  const updateQuestion = ind => {
-    history.push(`/questions/${ind}/edit`);
+  const updateQuestion = id => {
+    history.push(`/questions/${id}/edit`);
   };
 
   const CreateUrl = () => {
@@ -85,7 +85,7 @@ const ShowQuiz = ({ history }) => {
           <h1>
             Published, your public link is -{" "}
             <span className="underline text-blue-600">
-              http://localhost:3000/public/{id}/{slugData}
+              http://localhost:3000/public/{slugData}
             </span>
           </h1>
         )}

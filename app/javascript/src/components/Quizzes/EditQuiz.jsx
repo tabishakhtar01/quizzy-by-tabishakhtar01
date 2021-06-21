@@ -9,13 +9,13 @@ const EditQuiz = ({ history }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       await quizzesApi.update({
-        id,
+        slug,
         payload: { quiz: { title } },
       });
       setLoading(false);
@@ -28,7 +28,7 @@ const EditQuiz = ({ history }) => {
 
   const fetchQuizDetails = async () => {
     try {
-      const response = await quizzesApi.show(id);
+      const response = await quizzesApi.show(slug);
       setTitle(response.data.quiz.title);
     } catch (error) {
       alert(error);

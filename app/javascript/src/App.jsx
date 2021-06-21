@@ -38,11 +38,15 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
-        <Route path="/public/:id" component={NewUser} />
+        <Route exact path="/public/:slug/attempt/new" component={NewUser} />
         <Route exact path="/questions/:id/edit" component={EditQuestion} />
-        <Route exact path="/quizzes/:id/show/add" component={CreateQuestion} />
-        <Route exact path="/quizzes/:id/show" component={ShowQuiz} />
-        <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
+        <Route
+          exact
+          path="/quizzes/:slug/show/add"
+          component={CreateQuestion}
+        />
+        <Route exact path="/quizzes/:slug/show" component={ShowQuiz} />
+        <Route exact path="/quizzes/:slug/edit" component={EditQuiz} />
         <Route exact path="/quizzes/create" component={CreateQuiz} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
