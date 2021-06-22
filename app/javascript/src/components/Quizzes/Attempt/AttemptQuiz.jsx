@@ -67,17 +67,15 @@ const AttemptQuiz = ({ history }) => {
     let sortedData = arr1.sort((a, b) =>
       parseInt(a.question_id) > parseInt(b.question_id) ? 1 : -1
     );
-    var i = [];
+    var selectedOptions = [];
 
     //Pushing the index which will be true for choosen option and the correct option
     sortedData.map((val, ind) => {
       if (sortedData[ind].answer == questions[ind].correct_answer) {
-        i.push([ind]);
+        selectedOptions.push([ind]);
       }
     });
-    var correct = i.length;
-    var incorrect = arr1.length - i.length;
-    setCount(i.length);
+    setCount(selectedOptions.length);
 
     // After Submit -> submitted to true
     const submitResponse = await attemptsApi.list();
