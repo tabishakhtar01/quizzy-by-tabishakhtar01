@@ -9,6 +9,7 @@ import { isNil, isEmpty, either, update } from "ramda";
 import usersApi from "../../../apis/users";
 import Check from "@material-ui/icons/CheckCircleTwoTone";
 import attemptsApi from "../../../apis/attempts";
+import reportsApi from "../../../apis/reports";
 
 const AttemptQuiz = ({ history }) => {
   const { slug } = useParams();
@@ -50,6 +51,27 @@ const AttemptQuiz = ({ history }) => {
     setSub(submitResponse.data.attempts.slice(-1)[0].submitted);
   };
 
+  const createReport = async (correct, incorrect) => {
+    try {
+      await reportsApi.create({
+        report: {
+          quiz_id: quizId,
+          quiz_name: quizName,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          correct: correct,
+          incorrect: incorrect,
+        },
+      });
+      setLoading(false);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setPageLoading(false);
+    }
+  };
+
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -75,7 +97,10 @@ const AttemptQuiz = ({ history }) => {
         selectedOptions.push([ind]);
       }
     });
+    var correct = selectedOptions.length;
+    var incorrect = arr1.length - selectedOptions.length;
     setCount(selectedOptions.length);
+    createReport(correct, incorrect);
 
     // After Submit -> submitted to true
     const submitResponse = await attemptsApi.list();

@@ -16,6 +16,7 @@ import CreateQuestion from "./components/Questions/CreateQuestion";
 import EditQuestion from "./components/Questions/EditQuestion";
 import NewUser from "./components/Quizzes/Attempt/Auth/NewUser";
 import AttemptQuiz from "./components/Quizzes/Attempt/AttemptQuiz";
+import Report from "./components/Report/index";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,13 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
+        <PrivateRoute
+          exact
+          path="/report"
+          redirectRoute="/login"
+          condition={isLoggedIn}
+          component={Report}
+        />
         <Route
           exact
           path="/public/:slug/attempt/new/quiz"

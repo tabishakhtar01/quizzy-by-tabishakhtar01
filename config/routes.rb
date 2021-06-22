@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :questions, only: %i[update destroy]
   resources :options
   resources :attempts, param: :slug
+  resources :reports
+
 
   get '/public/:slug', to: redirect('/public/%{slug}/attempt/new')
   root "home#index"
