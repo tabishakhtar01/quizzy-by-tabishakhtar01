@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :questions, only: %i[create show], param: :slug
   resources :questions, only: %i[update destroy]
   resources :options
-  resources :attempts, param: :slug
+  resources :attempts, only: %i[index create update]
   resources :reports
 
   get '/public/:slug', to: redirect('/public/%{slug}/attempt/new')

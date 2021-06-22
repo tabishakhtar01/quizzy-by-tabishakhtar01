@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use React on Rails
 gem 'react-rails'
-
+gem "sidekiq"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'rexml', '~> 3.2', '>= 3.2.4'

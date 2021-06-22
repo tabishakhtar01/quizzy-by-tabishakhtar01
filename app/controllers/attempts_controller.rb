@@ -17,7 +17,11 @@ class AttemptsController < ApplicationController
     end
 
     def update
-      @attempt = Attempt.where(slug_data: params[:slug])
+      @attempt = Attempt.find(params[:id])
+      # attempt_params.attempt_answers_attributes.each do |attempt_answer|
+      #   attempt_answer.merge(attempt_id: @attempt.id)
+      # end
+
       if @attempt.update(attempt_params)
         render status: :ok, json: { }
       else
@@ -28,6 +32,18 @@ class AttemptsController < ApplicationController
     private
     
     def attempt_params
-      params.require(:attempt).permit(:quiz_id, :slug_data, :submitted)
-  end
+      params.require(:attempt).permit(:quiz_id, :slug_data, :submitted, :attempt_answers_attributes => [:question_id, :answer, :attempt_id])
+    end
 end
+
+# :correct_answer ,options_attributes: [:answer, :correct_answer_id])
+# def attempt_params
+#   params.require(:attempt)
+#     .permit(
+#       :quiz_id,
+#       :user_id,
+#       :correct_answer_count,
+#       :incorrect_answer_count,
+#       :attempt_answers_attributes => [:answer, :attempt_id, :question_id]
+#     ).merge(user_id: @current_user.id)
+# end
