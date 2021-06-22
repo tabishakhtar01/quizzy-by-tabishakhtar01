@@ -15,6 +15,11 @@ class ReportsController < ApplicationController
       rescue ActiveRecord::RecordNotUnique => e
         render status: :unprocessable_entity, json: { errors: e.message }
       end
+
+      def report
+        @reports = Report.all
+        send_data @reports.to_csv, filename: "reports-#{Date.today}.csv"
+      end
     
       private
     

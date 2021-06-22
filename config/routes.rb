@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   resources :attempts, param: :slug
   resources :reports
 
-
   get '/public/:slug', to: redirect('/public/%{slug}/attempt/new')
+  get '/report/download', to: 'reports#report'
+
   root "home#index"
   get '*path', to: 'home#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
