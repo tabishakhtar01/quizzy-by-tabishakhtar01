@@ -21,6 +21,10 @@ const NavBar = () => {
     }
   };
 
+  const sendReport = () => {
+    location.replace(`/report`);
+  };
+
   return (
     <nav className="bg-white border-b">
       <div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
@@ -31,6 +35,16 @@ const NavBar = () => {
             </Link>
           </h1>
           <div className="flex items-center justify-end gap-x-4">
+            <a
+              onClick={sendReport}
+              className="inline-flex items-center px-1 pt-1 text-md
+                  font-semibold leading-5 text-bb-gray-600 text-opacity-50
+                  transition duration-150 ease-in-out border-b-2
+                  border-transparent hover:text-bb-gray-600 focus:outline-none
+                  focus:text-bb-gray-700 cursor-pointer"
+            >
+              Report
+            </a>
             <span
               className="inline-flex items-center px-2 pt-1 text-md font-regular leading-5 text-bb-gray-600
                   text-opacity-50 transition duration-150 ease-in-out border-b-2 border-transparent focus:outline-none
