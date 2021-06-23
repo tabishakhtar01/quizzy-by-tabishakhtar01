@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   resources :questions, only: %i[create show], param: :slug
   resources :questions, only: %i[update destroy]
   resources :options
-  resources :attempts, param: :slug
+  resources :attempts, only: %i[index create update]
   resources :reports
 
-
   get '/public/:slug', to: redirect('/public/%{slug}/attempt/new')
+  get '/report/download', to: 'reports#report'
+
   root "home#index"
   get '*path', to: 'home#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

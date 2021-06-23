@@ -30,6 +30,8 @@ const AttemptQuiz = ({ history }) => {
   const [email, setEmail] = useState("");
   const [sub, setSub] = useState(false);
   const [quizId, setQuizId] = useState();
+  const [attemptId, setAttemptId] = useState();
+  const [storeAnswer, setStoreAnswer] = useState([]);
 
   const fetchUserDetails = async () => {
     try {
@@ -38,7 +40,6 @@ const AttemptQuiz = ({ history }) => {
       setFirstName(response.data.users.slice(-1)[0].first_name);
       setLastName(response.data.users.slice(-1)[0].last_name);
       setEmail(response.data.users.slice(-1)[0].email);
-      const submitResponse = await attemptsApi.list();
     } catch (error) {
       alert(error);
     } finally {
@@ -48,6 +49,7 @@ const AttemptQuiz = ({ history }) => {
 
   const fetchIsSubmitted = async () => {
     const submitResponse = await attemptsApi.list();
+    setAttemptId(submitResponse.data.attempts.slice(-1)[0].id);
     setSub(submitResponse.data.attempts.slice(-1)[0].submitted);
   };
 
@@ -77,6 +79,7 @@ const AttemptQuiz = ({ history }) => {
     const value = event.target.value;
     const radioData = [...fields];
     radioData.push({ question_id: name, answer: value });
+    // console.log('RadioValue',radioData)
     setFields(radioData);
   }
 
@@ -104,11 +107,22 @@ const AttemptQuiz = ({ history }) => {
 
     // After Submit -> submitted to true
     const submitResponse = await attemptsApi.list();
-
     try {
+      arr1.map(answersData => {
+        let obj = { ...answersData };
+        answersData.attempt_id = attemptId;
+        return obj;
+      });
+
       const updt = await attemptsApi.update({
-        slug,
-        payload: { attempt: { submitted: true } },
+        attemptId,
+        payload: {
+          attempt: {
+            submitted: true,
+            user_id: userId,
+            attempt_answers_attributes: arr1,
+          },
+        },
       });
       setLoading(false);
     } catch (error) {

@@ -17,7 +17,7 @@ class AttemptsController < ApplicationController
     end
 
     def update
-      @attempt = Attempt.where(slug_data: params[:slug])
+      @attempt = Attempt.find(params[:id])
       if @attempt.update(attempt_params)
         render status: :ok, json: { }
       else
@@ -28,6 +28,6 @@ class AttemptsController < ApplicationController
     private
     
     def attempt_params
-      params.require(:attempt).permit(:quiz_id, :slug_data, :submitted)
-  end
+      params.require(:attempt).permit(:quiz_id, :slug_data, :submitted, :user_id, :attempt_answers_attributes => [:question_id, :answer, :attempt_id])
+    end
 end

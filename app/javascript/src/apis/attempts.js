@@ -2,7 +2,8 @@ import axios from "axios";
 
 const list = () => axios.get("/attempts");
 const create = payload => axios.post("/attempts/", payload);
-const update = ({ slug, payload }) => axios.put(`/attempts/${slug}`, payload);
+const update = ({ attemptId, payload }) =>
+  axios.put(`/attempts/${attemptId}`, payload);
 
 const attemptsApi = {
   list,
