@@ -85,7 +85,7 @@ const ShowQuiz = ({ history }) => {
           <h1>
             Published, your public link is -{" "}
             <span className="underline text-blue-600">
-              http://localhost:3000/public/{slugData}
+              https://quizzy-rails.herokuapp.com/{slugData}
             </span>
           </h1>
         )}
