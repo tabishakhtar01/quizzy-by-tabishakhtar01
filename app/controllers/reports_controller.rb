@@ -1,3 +1,4 @@
+require 'csv'
 class ReportsController < ApplicationController
     def index
         @reports = Report.order('created_at DESC')
@@ -18,7 +19,9 @@ class ReportsController < ApplicationController
 
       def report
         @reports = Report.all
+        PygmentsWorker.perform_in(10)
         send_data @reports.to_csv, filename: "reports-#{Date.today}.csv"
+
       end
     
       private

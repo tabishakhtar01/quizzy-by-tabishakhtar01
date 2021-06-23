@@ -40,7 +40,6 @@ const AttemptQuiz = ({ history }) => {
       setFirstName(response.data.users.slice(-1)[0].first_name);
       setLastName(response.data.users.slice(-1)[0].last_name);
       setEmail(response.data.users.slice(-1)[0].email);
-      const submitResponse = await attemptsApi.list();
     } catch (error) {
       alert(error);
     } finally {
@@ -108,7 +107,6 @@ const AttemptQuiz = ({ history }) => {
 
     // After Submit -> submitted to true
     const submitResponse = await attemptsApi.list();
-
     try {
       arr1.map(answersData => {
         let obj = { ...answersData };
@@ -121,6 +119,7 @@ const AttemptQuiz = ({ history }) => {
         payload: {
           attempt: {
             submitted: true,
+            user_id: userId,
             attempt_answers_attributes: arr1,
           },
         },

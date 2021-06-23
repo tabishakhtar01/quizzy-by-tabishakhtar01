@@ -9,7 +9,6 @@ class Report < ApplicationRecord
 
             all.each do |report|
                 csv << report.attributes.values_at(*attributes)
-                # csv << attributes.map { |attr| result.send(attr)}
             end
         end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_165144) do
+ActiveRecord::Schema.define(version: 2021_06_23_072541) do
 
   create_table "attempt_answers", force: :cascade do |t|
     t.string "answer", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_06_22_165144) do
     t.boolean "submitted"
     t.integer "quiz_id"
     t.string "slug_data"
+    t.integer "user_id"
   end
 
   create_table "options", force: :cascade do |t|
