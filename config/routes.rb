@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :sessions, only: %i[create destroy] 
   resources :quizzes, except: %i[new edit], param: :slug
   resources :questions, only: %i[create show], param: :slug
-  resources :questions, only: %i[update destroy]
+  resources :questions, only: %i[index update destroy]
   resources :options
   resources :attempts, only: %i[index create update]
   resources :reports

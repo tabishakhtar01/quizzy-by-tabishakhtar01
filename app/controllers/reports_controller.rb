@@ -1,4 +1,3 @@
-require 'csv'
 class ReportsController < ApplicationController
     def index
         @reports = Report.order('created_at DESC')
@@ -18,10 +17,10 @@ class ReportsController < ApplicationController
       end
 
       def report
-        @reports = Report.all
-        PygmentsWorker.perform_in(10)
-        send_data @reports.to_csv, filename: "reports-#{Date.today}.csv"
-
+        reports = Report.all
+        TaskLoggerJob.perform_now(reports)
+        sleep(10)
+        send_file "#{Rails.root}/public/report.xlsx"
       end
     
       private

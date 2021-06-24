@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
     private
   
     def question_params
-      params.require(:question).permit(:question, :quiz_id, :slug_data, :correct_answer ,options_attributes: [:answer, :correct_answer_id])
+      params.require(:question).permit(:question, :quiz_id, :slug_data, :correct_answer ,options_attributes: [:answer, :id, :correct_answer_id])
     end
 
 
