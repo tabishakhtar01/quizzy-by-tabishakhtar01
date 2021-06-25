@@ -116,9 +116,9 @@ const ShowQuiz = ({ history }) => {
           {questions.map((curr, index) => {
             return (
               <>
-                <div className="bg-gray-200 mx-10 mt-10 mb-20 rounded-xl shadow-2xl">
-                  <div className="p-10">
-                    <div className="flex justify-end">
+                <div className="bg-gray-200 mx-2 md:mx-10 mt-10 mb-20 rounded-xl shadow-2xl">
+                  <div className="p-5 md:p-10">
+                    <div className="flex justify-center md:justify-end pb-5 md:pb-0">
                       <button
                         onClick={() => updateQuestion(curr.id)}
                         className="bg-blue-700 text-white mr-5 px-3 rounded-full hover:bg-blue-300 hover:text-blue-700"
@@ -134,7 +134,7 @@ const ShowQuiz = ({ history }) => {
                         Remove
                       </button>
                     </div>
-                    <h1 className="text-3xl">
+                    <h1 className="text-xl md:text-3xl">
                       Question {index + 1}: {curr.question}
                     </h1>
                     {optionDetails.map(opt => {
@@ -145,7 +145,7 @@ const ShowQuiz = ({ history }) => {
                               Option {parseInt(opt.correct_answer_id) + 1}:
                             </span>
                             <span
-                              className={`text-xl my-4 ${
+                              className={`text-lg md:text-xl my-4 ${
                                 curr.correct_answer == opt.correct_answer_id
                                   ? "text-green-600"
                                   : "text-gray-700"
@@ -157,7 +157,9 @@ const ShowQuiz = ({ history }) => {
                               {curr.correct_answer == opt.correct_answer_id && (
                                 <>
                                   <Check />
-                                  Correct answer
+                                  <span className="hidden md:inline-block">
+                                    Correct answer
+                                  </span>
                                 </>
                               )}
                             </span>

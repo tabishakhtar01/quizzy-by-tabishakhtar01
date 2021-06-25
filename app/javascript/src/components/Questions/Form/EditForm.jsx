@@ -16,6 +16,8 @@ const QuestionForm = ({
   answer_four,
   setAnswer,
   answer,
+  threeData,
+  fourData,
   loading,
   handleSubmit,
 }) => {
@@ -42,7 +44,7 @@ const QuestionForm = ({
         onChange={e => setAnswer_two(e.target.value)}
       />
 
-      {answer_three.length > 0 && (
+      {threeData && (
         <Input
           label="Option 3"
           placeholder=""
@@ -50,7 +52,8 @@ const QuestionForm = ({
           onChange={e => setAnswer_three(e.target.value)}
         />
       )}
-      {answer_four.length > 0 && (
+
+      {fourData && (
         <Input
           label="Option 4"
           placeholder=""

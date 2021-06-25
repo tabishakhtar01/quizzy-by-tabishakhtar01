@@ -196,13 +196,13 @@ const AttemptQuiz = ({ history }) => {
                 <h1 className="mt-10 text-6xl text-gray-600">
                   {quizDetails?.title}
                 </h1>
-                <div>
+                <div className="">
                   {questions.map((curr, index) => {
                     return (
                       <>
-                        <div className="bg-gray-200 mx-10 mt-10 mb-20 rounded-xl shadow-2xl">
-                          <div className="p-10">
-                            <h1 className="text-3xl">
+                        <div className="bg-gray-200 mx-2 md:mx-10 mt-10 mb-20 rounded-xl shadow-2xl">
+                          <div className="p-5 md:p-10">
+                            <h1 className="text-xl md:text-3xl">
                               Question {index + 1}: {curr.question}
                             </h1>
                             {optionDetails.map(opt => {
@@ -241,21 +241,25 @@ const AttemptQuiz = ({ history }) => {
                                             return (
                                               <>
                                                 <span
-                                                  className={`${
+                                                  className={`text-lg md:text-xl${
                                                     opt.correct_answer_id ==
                                                     curr.correct_answer
                                                       ? "text-green-700"
                                                       : "text-gray-700"
-                                                  } text-xl my-2`}
+                                                  }  my-2`}
                                                 >
                                                   {opt.answer}
                                                 </span>
                                                 {curr.correct_answer ==
                                                   opt.correct_answer_id && (
-                                                  <span className="text-green-600">
-                                                    <Check />
-                                                    Correct answer
-                                                  </span>
+                                                  <>
+                                                    <span className="text-lg md:text-xl text-green-600">
+                                                      <Check />
+                                                    </span>
+                                                    <span className="text-lg md:text-xl hidden md:inline-block text-green-600">
+                                                      Correct answer
+                                                    </span>
+                                                  </>
                                                 )}
                                               </>
                                             );
@@ -276,10 +280,14 @@ const AttemptQuiz = ({ history }) => {
                                                 </span>
                                                 {curr.correct_answer ==
                                                   opt.correct_answer_id && (
-                                                  <span className="text-green-600">
-                                                    <Check />
-                                                    Correct answer
-                                                  </span>
+                                                  <>
+                                                    <span className="text-green-600">
+                                                      <Check />
+                                                    </span>
+                                                    <span className="hidden md:inline-block text-green-600">
+                                                      Correct answer
+                                                    </span>
+                                                  </>
                                                 )}
                                               </>
                                             );

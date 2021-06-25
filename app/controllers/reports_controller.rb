@@ -17,10 +17,11 @@ class ReportsController < ApplicationController
       end
 
       def report
-        reports = Report.all
-        TaskLoggerJob.perform_now(reports)
-        sleep(10)
-        send_file "#{Rails.root}/public/report.xlsx"
+        reports = Report.order('created_at DESC')
+        # TaskLoggerJob.perform_now(reports)
+        # sleep(10)
+        # send_file "#{Rails.root}/public/report.xlsx"
+        send_data reports.to_csv, filename: "reports-#{Date.today}.csv"
       end
     
       private

@@ -9,6 +9,7 @@ import optionsApi from "../../apis/options";
 
 const EditQuestion = ({ history }) => {
   const { id } = useParams();
+  const [slug, setSlug] = useState("");
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -21,6 +22,8 @@ const EditQuestion = ({ history }) => {
   const [answer_twoId, setAnswer_twoId] = useState(null);
   const [answer_threeId, setAnswer_threeId] = useState(null);
   const [answer_fourId, setAnswer_fourId] = useState(null);
+  const [threeData, setThreeData] = useState(null);
+  const [fourData, setFourData] = useState(null);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -50,7 +53,7 @@ const EditQuestion = ({ history }) => {
       });
 
       setLoading(false);
-      history.push(`/dashboard`);
+      history.push(`/quizzes/${slug}/show`);
     } catch (error) {
       setLoading(false);
       alert(error);
@@ -69,15 +72,18 @@ const EditQuestion = ({ history }) => {
     ) {
       setAnswer_three(optResponse.data.option[2].answer);
       setAnswer_threeId(optResponse.data.option[2].id);
+      setThreeData(true);
     }
     if (optResponse.data.option.length == 4) {
       setAnswer_four(optResponse.data.option[3].answer);
+      setFourData(true);
       setAnswer_fourId(optResponse.data.option[3].id);
     }
     const data = response.data.questions;
     data.map(question => {
       if (question.id == id) {
         setQuestion(question.question);
+        setSlug(question.slug_data);
       }
     });
     setPageLoading(false);
@@ -111,6 +117,8 @@ const EditQuestion = ({ history }) => {
         setAnswer_four={setAnswer_four}
         answer={answer}
         setAnswer={setAnswer}
+        threeData={threeData}
+        fourData={fourData}
         loading={loading}
         handleSubmit={handleSubmit}
       />
