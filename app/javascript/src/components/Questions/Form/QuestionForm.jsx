@@ -8,10 +8,15 @@ const QuestionForm = ({
   question,
   setQuestion,
   setAnswer_one,
+  answer_one,
   setAnswer_two,
+  answer_two,
   setAnswer_three,
+  answer_three,
   setAnswer_four,
+  answer_four,
   setAnswer,
+  answer,
   loading,
   handleSubmit,
 }) => {
@@ -38,14 +43,14 @@ const QuestionForm = ({
       <Input
         label="Option 1"
         placeholder=""
-        value={question}
+        value={answer_one}
         onChange={e => setAnswer_one(e.target.value)}
       />
 
       <Input
         label="Option 2"
         placeholder=""
-        value={question}
+        value={answer_two}
         onChange={e => setAnswer_two(e.target.value)}
       />
 
@@ -54,7 +59,7 @@ const QuestionForm = ({
           <Input
             label="Option 3"
             placeholder=""
-            value={question}
+            value={answer_three}
             onChange={e => setAnswer_three(e.target.value)}
           />
           <button
@@ -70,7 +75,7 @@ const QuestionForm = ({
             <Input
               label="Option 3"
               placeholder=""
-              value={question}
+              value={answer_three}
               onChange={e => setAnswer_three(e.target.value)}
             />
             <button
@@ -83,7 +88,7 @@ const QuestionForm = ({
             <Input
               label="Option 4"
               placeholder=""
-              value={question}
+              value={answer_four}
               onChange={e => setAnswer_four(e.target.value)}
             />
             <button

@@ -26,6 +26,7 @@ gem "sidekiq"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
+gem 'caxlsx'
 
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.13'
